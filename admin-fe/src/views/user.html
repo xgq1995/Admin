@@ -1,0 +1,62 @@
+{{#if isSignin}}
+  <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="public/images/1.jpg" alt="user" class="profile-pic" /></a>
+  {{else}}
+  <span class="hidden-xs dropdown-toggle text-muted waves-effect waves-dark" id="user-signin"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</span>
+  <span class="hidden-xs dropdown-toggle text-muted waves-effect waves-dark" id="user-signup"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Regist</span>
+  {{/if}}
+  <div class="dropdown-menu dropdown-menu-right scale-up">
+      <ul class="dropdown-user">
+          {{#if isSignin}}
+          <li>
+              <div class="dw-user-box">
+                  <div class="u-img"><img src="public/images/1.jpg" alt="user"></div>
+                  <div class="u-text">
+                      <h4>你好,{{username}}!</h4>
+                      <p class="text-muted">varun@gmail.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+              </div>
+          </li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
+          <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
+          <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
+          <li role="separator" class="divider"></li>
+          <li><a href="#" class="singOut"><i class="fa fa-power-off"></i> Logout</a></li>
+          {{else}}
+          <li>
+              <div class="dw-user-box useTitle">
+                 
+              </div>
+          </li>
+          <li>
+              <div class="dw-user-box">
+            <form class="form p-t-20" id="user-form">
+              <div class="form-group">
+                  <label for="exampleInputuname2">User Name</label>
+                  <div class="input-group">
+                      <input type="text" class="form-control" name="username" id="username" placeholder="Username">
+                      <div class="input-group-addon"><i class="ti-user"></i></div>
+                  </div>
+              </div>
+              
+              <div class="form-group">
+                  <label for="exampleInputpwd2">Password</label>
+                  <div class="input-group">
+                      <input type="password" class="form-control" name="password" id="password"  placeholder="Enter pwd">
+                      <div class="input-group-addon"><i class="ti-lock"></i></div>
+                  </div>
+              </div>
+             
+              <div class="text-center">
+                  <button type="submit" class="btn btn-success waves-effect waves-light m-r-10" id="confirm">Submit</button>
+                  <button type="submit" class="btn btn-inverse waves-effect waves-light">Cancel</button>
+              </div>
+            </form>
+          </div>
+              </li>
+          {{/if}}
+        </ul>
+        </div>
+      
+
