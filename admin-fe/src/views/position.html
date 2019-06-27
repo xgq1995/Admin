@@ -39,39 +39,12 @@
                                             <div class="col-md-12 m-b-20">
                                                 <input type="text" class="form-control" name="salery" id="salery"
                                                     placeholder="Salary"> </div>
-                                            {{!-- <div class="col-md-12 m-b-20">
-                                                                            <div class="fileupload btn btn-danger btn-rounded waves-effect waves-light"><span><i class="ion-upload m-r-5"></i>Upload Contact Image</span>
-                                                                                <input type="file" class="upload"> </div>
-                                                                        </div>  --}}
+                                           
                                         </div>
 
-                                        {{!-- <div class="text-center">
-                  <button type="submit" class="btn btn-success waves-effect waves-light m-r-10" id="possubmit">Submit</button>
-                  <button type="submit" class="btn btn-inverse waves-effect waves-light" id="popback">Cancel</button>
-              </div> --}}
+                                        
                                     </form>
-                                    {{!-- <from class="form-horizontal form-material" id="possave" action="/api/position/save" method="post" enctype="multipart/form-data">
-                                                                    <div class="form-group">
-                                                                        <div class="col-md-12 m-b-20">
-                                                                            <input type="text" class="form-control" name="name" id="name" placeholder="Name"> </div>
-                                                                        <div class="col-md-12 m-b-20">
-                                                                            <input type="text" class="form-control" name="email" id="email" placeholder="Email"> </div>
-                                                                        <div class="col-md-12 m-b-20">
-                                                                            <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone"> </div>
-                                                                        <div class="col-md-12 m-b-20">
-                                                                            <input type="text" class="form-control" name="role" id="role" placeholder="Designation"> </div>
-                                                                        <div class="col-md-12 m-b-20">
-                                                                            <input type="text" class="form-control" name="age" id="age" placeholder="Age"> </div>
-                                                                        <div class="col-md-12 m-b-20">
-                                                                            <input type="text" class="form-control" name="joining_date" id="joining_date" placeholder="Date of joining"> </div>
-                                                                        <div class="col-md-12 m-b-20">
-                                                                            <input type="text" class="form-control" name="salery" id="salery" placeholder="Salary"> </div>
-                                                                         <div class="col-md-12 m-b-20">
-                                                                            <div class="fileupload btn btn-danger btn-rounded waves-effect waves-light"><span><i class="ion-upload m-r-5"></i>Upload Contact Image</span>
-                                                                                <input type="file" class="upload"> </div>
-                                                                        </div> 
-                                                                    </div>
-                                                                </from> --}}
+                                  
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-info waves-effect" id="possubmit"
@@ -80,27 +53,23 @@
                                         data-dismiss="modal">Cancel</button>
                                 </div>
                             </div>
-                            <!-- /.modal-content -->
                         </div>
-                        <!-- /.modal-dialog -->
                     </div>
                     <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list footable-loaded footable"
                         data-page-size="10">
                         <thead>
                             <div class="text-center">
  <th colspan="9">
-                                    <form>
                                         <div class="input-group footable-filtering-search"><label
                                                 class="sr-only">Search</label>
-                                            <div class="input-group"><input type="text" class="form-control"
-                                                    placeholder="Search">
+                                            <div class="input-group"><input type="text" class="form-control" id="keywords"
+                                                value="{{keywords}}" name="pos_search"   placeholder="Search">
                                                 <div class="input-group-append"><button type="button"
-                                                        class="btn btn-primary"><i class="ti-search"></i></button>
+                                                        class="btn btn-primary" id="possearch"><i class="ti-search"></i></button>
                                                    
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
                                 </th>
                             </div>
                                
@@ -119,20 +88,20 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{#if hasResult}}
-                            {{#each data}}
-                            <tr class="footable-even" id={{ _id}}>
-                                <td><span class="footable-toggle"></span>{{@index}}</td>
+                            {{if hasResult}}
+                            {{each data}}
+                            <tr class="footable-even" id="{{$value['_id']}}" data-total="{{total}}">
+                                <td><span class="footable-toggle"></span>{{page * pagesize + $index + 1}}</td>
                                 <td>
                                     <a href="javascript:void(0)"><img src="public/images/4.jpg" alt="user" width="40"
-                                            class="img-circle">{{name}}</a>
+                                            class="img-circle">{{$value['name']}}</a>
                                 </td>
-                                <td>{{email}}</td>
-                                <td>{{phone}}</td>
-                                <td><span class="label label-info">{{role}}</span> </td>
-                                <td>{{age}}</td>
-                                <td>{{joining_date}}</td>
-                                <td>{{salery}}</td>
+                                <td>{{$value['email']}}</td>
+                                <td>{{$value['phone']}}</td>
+                                <td><span class="label {{classList[$index%5]}}">{{$value['role']}}</span> </td>
+                                <td>{{$value['age']}}</td>
+                                <td>{{$value['joining_date']}}</td>
+                                <td>{{$value['salery']}}</td>
                                 <td>
                                     <button type="button"
                                         class="btn btn-sm btn-icon btn-pure btn-outline alt-row-btn"><i
@@ -236,14 +205,14 @@
                                 <td colspan="7">
                                     <div class="text-right">
                                         <ul class="pagination">
-                                            <li class="footable-page-arrow disabled"><a data-page="first"
-                                                    href="#first">«</a></li>
-                                            <li class="footable-page-arrow disabled"><a data-page="prev"
-                                                    href="#prev">‹</a></li>
-                                            <li class="footable-page active"><a data-page="0" href="#">1</a></li>
-                                            <li class="footable-page"><a data-page="1" href="#">2</a></li>
-                                            <li class="footable-page-arrow"><a data-page="next" href="#next">›</a></li>
-                                            <li class="footable-page-arrow"><a data-page="last" href="#last">»</a></li>
+                                            <li class="footable-page-arrow "><a data-page="first" href="{{url}}?page=0&pagesize={{pagesize}}&keywords={{keywords}}">«</a></li>
+                                            <li class="footable-page-arrow "><a data-page="prev" href="{{url}}?page={{page>0 ? page-1 : 0}}&pagesize={{pagesize}}&keywords={{keywords}}">‹</a></li>
+                                                    {{each pagecount}}
+                                                    <li class="footable-page {{if $index === page}} active {{/if}}">
+                                                        <a data-page="0" href="{{url}}?page={{$index}}&pagesize={{pagesize}}&keywords={{keywords}}">{{$value}}</a></li>
+                                                        {{/each}}
+                                            <li class="footable-page-arrow"><a data-page="next" href="{{url}}?page={{page < (pagecount.length-1) ? (page+1) : (pagecount.length-1)}}&pagesize={{pagesize}}&keywords={{keywords}}">›</a></li>
+                                            <li class="footable-page-arrow"><a data-page="last" href="{{url}}?page={{(pagecount.length-1)}}&pagesize={{pagesize}}&keywords={{keywords}}">»</a></li>
                                         </ul>
                                     </div>
                                 </td>

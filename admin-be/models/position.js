@@ -21,22 +21,33 @@ No	Name	Email	Phone	Role	Age	Joining date	Salery	Action
   save(data) {
     let position = new this.positionModel({
       ...data,
-      Joining_date: '2019年6月21日'
+      joining_date: '2019年6月21日'
     })
 
     return position.save()
   }
 
   // 查询所有数据
-  findAll() {
-    return this.positionModel.find({}).sort({_id:-1})
+  findAll(keywords) {
+    let regExp = new RegExp(keywords, "i")
+    return this.positionModel.find({}).sort({_id: -1})
+    .or([{name:regExp},{email:regExp},{phone:regExp},{role:regExp},{salery:regExp},{joining_date:regExp}])
+  
   }
   findOne(id) {
+    console.log("findOne")
     return this.positionModel.findById(id)
   }
+  findMany({page, pagesize, keywords}){
+    let regExp = new RegExp(keywords, "i")
+    return this.positionModel.find({}).skip(page * pagesize).limit(pagesize).sort({_id:-1})
+            .or([{name:regExp},{email:regExp},{phone:regExp},{role:regExp},{salery:regExp},{joining_date:regExp}])
+  }
   delete(id){
-    console.log(id)
-    return this.positionModel.findOneAndRemove(id)
+    return this.positionModel.findOneAndRemove({_id:id})
+  }
+  update(id, update){
+    return this.positionModel.findOneAndUpdate({_id:id}, update)
   }
 }
 

@@ -11,4 +11,6 @@ router.route('/')
   .delete(positionController.delete)
 
 router.get('/one', positionController.findOne)
+router.get('/find', positionController.findMany)
+router.post('/update',positionController.update)
 module.exports = router
