@@ -38,16 +38,16 @@ export const render = async(req, res, next) => {
       res.render(list)
     }
   })
-    bindPositionAddEvent(res)
+    bindPositionAddEvent(res,req)
   }else{
     res.go('/')
   }
   
 }
 function bindPositionAddEvent(res,req) {
-  $('#router-view').off('click', '.delete-row-btn').on('click', '#posback',(e) => {
-    res.back()
-  })
+  // $('#router-view').off('click', '.delete-row-btn').on('click', '#posback',(e) => {
+  //   res.back()
+  // })
   $('#router-view').off('click', '#addUse').on('click', '#addUse',function(e){
     
      $('.modal-content').html(positionAddTpl)
