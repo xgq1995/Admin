@@ -13,7 +13,7 @@ export const render = async(req, res, next) => {
     let keywords = req.query && req.query.keywords || ''
   // 开始渲染列表数据
   $.ajax({
-    url:'http://localhost:8000/api/position/find/',
+    url:'/api/position/find/',
     headers:{
       'X-Access-Token':localStorage.getItem('token')
     },
